@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Image, ListGroup, Card, Button, Form  } from 'react-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import products from '../products'
 import Rating from '../components/Rating'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
