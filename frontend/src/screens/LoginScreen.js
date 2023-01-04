@@ -5,11 +5,18 @@ import { Button, Form, Row } from 'react-bootstrap'
 import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userActions'
+import { useLocation } from 'react-router-dom'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
 
-function LoginScreen(  ) {
+
+
+
+function LoginScreen( ) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   let navigate = useNavigate();  
+  const Location = useLocation()
 
   const dispatch = useDispatch()
 
@@ -22,7 +29,7 @@ function LoginScreen(  ) {
     if(userInfo){
       navigate(redirect)
     }
-  }, [userInfo, redirect])
+  }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -32,6 +39,8 @@ function LoginScreen(  ) {
   return (
     <FormContainer>
         <h1>Sign In </h1>
+        {error && <Message variant='danger'>No active account fount with the given credentials</Message>}
+        {loading && <Loader/>}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='email'>
               <Form.Label>

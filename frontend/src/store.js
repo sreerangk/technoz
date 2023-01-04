@@ -9,7 +9,7 @@ import { userLoginReducer } from './reducers/userReducer'
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
-    cart:cartReducers,
+    cart: cartReducers,
     userLogin: userLoginReducer,
 })
 
