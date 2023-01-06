@@ -32,22 +32,9 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @api_view(['POST'])
 def registerUser(request):
-    
-
+    data=request.data
     try:
-        data=request.data
-        password=data['password']
-        confirm_password=data['confirm_password']
-        if password==confirm_password:
-            userpassword=password
-            print(userpassword)
-        else:
-            response=Response()
-            response.data={
-            'error':'password miss match'
-            }
-            return response
-       
+
         user = User.objects.create( 
             first_name=data['name'],
             username=data['email'],
