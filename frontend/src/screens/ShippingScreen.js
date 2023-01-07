@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login, register } from '../actions/userActions'
 import { useLocation } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
+import CheckOutSteps from '../components/CheckoutSteps'
 import { saveShippingAddress } from '../actions/cartActions' 
+
 
 function ShippingScreen() {
 
@@ -31,7 +33,8 @@ function ShippingScreen() {
 
   return (
     <FormContainer>
-        <h1>shipping</h1>
+    <CheckOutSteps step1 step2 />
+        <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
             <Form.Group controlId='address'>
                 <Form.Label>Address</Form.Label>
@@ -79,7 +82,7 @@ function ShippingScreen() {
             </Form.Group>
 
             
-        <Button type='submit' variant='primary'>
+        <Button className='mt-3' type='submit' variant='dark'>
         Continue
         </Button>
 

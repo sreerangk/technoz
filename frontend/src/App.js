@@ -7,7 +7,10 @@ import LoginScreen from './screens/LoginScreen';
 import ProductScreen from './screens/ProductScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import PaymentScreen from './screens/PaymentScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+
 
 
 
@@ -22,9 +25,11 @@ function App() {
             {" "}
             <Route path="/" element={<HomeScreen />} exact />
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/register" element={<RegisterScreen />} exact />
+            <Route path="/register" element={<RegisterScreen />} />
             <Route path="/profile" element={<ProfileScreen />} />
-            <Route path="/shipping" element={<ShippingScreen />} exact />
+            <Route path="/shipping" element={<ShippingScreen />}/>
+            <Route path="/payment" element={<PaymentScreen />}/>
+            <Route path="/placeorder" element={<PlaceOrderScreen />}/>
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/:id?" element={<CartScreen />} />
 

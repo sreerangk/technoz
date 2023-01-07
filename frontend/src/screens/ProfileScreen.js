@@ -41,7 +41,6 @@ function ProfileScreen() {
         if( !user || !user.name || success){
             dispatch({ type:USER_UPDATE_PROFILE_RESET })
             dispatch(getUserDetails('profile'))
-           
         }else{
             setName(user.name)
             setEmail(user.email)
@@ -124,7 +123,7 @@ function ProfileScreen() {
                     </Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button className='mt-3' type='submit' variant='dark'>
                     Update
                 </Button>
 
