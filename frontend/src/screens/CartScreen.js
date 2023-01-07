@@ -7,7 +7,7 @@ import Message from '../components/Message'
 
 
 
-function CartScreen(props) {
+function CartScreen() {
     const  productId  = useParams()
     const [searchPara] = useSearchParams()
 

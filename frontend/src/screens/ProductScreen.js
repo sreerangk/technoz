@@ -103,7 +103,7 @@ function ProductScreen(props) {
                             )}       
                         <ListGroup.Item>
                         <Row>
-                            <Button onClick={addToCartHandler} className='btn-block btn-dark ' disabled={product.countInStock == 0 } type='button'>Add to Cart</Button>
+                            <Button onClick={addToCartHandler} className='btn-block btn-dark ' disabled={product.countInStock === 0 } type='button'>Add to Cart</Button>
                         </Row>
                         </ListGroup.Item>
                     </ListGroup>

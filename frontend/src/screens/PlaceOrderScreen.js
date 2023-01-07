@@ -7,9 +7,16 @@ import { useLocation } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
 import CheckOutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
+import { createOrder } from '../actions/orderActions'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 
 function PlaceOrderScreen() {
+
+  const orderCreate = useSelector(state => state.orderCreate)
+  const { order, error, success } = orderCreate
+  const navigate = useNavigate()
+
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
 
@@ -17,10 +24,31 @@ function PlaceOrderScreen() {
   cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
   cart.taxPrice = Number((.18) * cart.itemsPrice).toFixed(2)
 
-  cart.totalPrice = Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)
+  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
+
+
+
+  if(!cart.paymentMethod){
+    navigate('/payment')
+  }
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`)
+      dispatch({ type: ORDER_CREATE_RESET })
+    }
+  }, [success])  
 
   const placeOrder = () => {
-
+    dispatch(createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice,
+    }))
   }
   return (
     <div>
@@ -34,7 +62,7 @@ function PlaceOrderScreen() {
                   <h2>Shipping</h2>
                   <p>
                     <strong>Shipping: </strong>
-                    {cart.shippingAddress.address},{cart.shippingAddress.city},
+                    {cart.shippingAddress.address}, {cart.shippingAddress.city},
                     {'  '}
                     {cart.shippingAddress.postalCode},
                     {'  '}
@@ -45,7 +73,7 @@ function PlaceOrderScreen() {
                 <h2>Payment Method</h2>
                 <p>
                   <strong>Method: </strong>
-                  {cart.paymentMthod}
+                  {cart.paymentMethod}
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -109,10 +137,15 @@ function PlaceOrderScreen() {
                           <Col>${cart.totalPrice}</Col>
                       </Row>
                   </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    {error && <Message variant='danger'>{error}</Message>}
+                   </ListGroup.Item>
+
                   <ListGroup.Item>  
                   <Button  
                       type='button'
-                      style={{ width: "100%",}}
+                      style={{ width: "100%"}}
                       className='btn-block btn-dark'
                       disabled={cart.cartItems === 0}
                       onClick={placeOrder}
