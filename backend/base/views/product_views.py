@@ -5,8 +5,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from base.models import Product, Review
-from base.serializers import ProductSerializer
+from base.models import Product, Review, User
+from base.serializers import ProductSerializer,UserSerializer
 
 from rest_framework import status
 
