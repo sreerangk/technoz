@@ -29,7 +29,7 @@ function ProfileScreen() {
     const {error, loading, user} = userDetails
       
     const userLogin = useSelector(state => state.userLogin)
-    const  userInfo  = userLogin
+    const  { userInfo }  = userLogin
       
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
@@ -42,7 +42,7 @@ function ProfileScreen() {
       if(!userInfo){
         navigate('/login')
       }else{
-        if( !user || !user.name || success){
+        if( !user || !user.name || success|| userInfo._id !== user._id){
             dispatch({ type:USER_UPDATE_PROFILE_RESET })
             dispatch(getUserDetails('profile'))
             dispatch(listMyOrders())
