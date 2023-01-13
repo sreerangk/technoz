@@ -4,11 +4,12 @@ import Footer from '../components/Footer'
 import { Button, Form} from 'react-bootstrap'
 import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUser } from '../actions/userActions'
 import { useLocation } from 'react-router-dom'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
+import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 
 function UseEditScreen() {
@@ -24,8 +25,17 @@ function UseEditScreen() {
 
     const userDetails = useSelector(state => state.userDetails)
     const {error, loading, user} = userDetails
+   
+    const userUpdate = useSelector(state => state.userUpdate)
+    const {error: errorUpdate, loading: loadingUpdate, success:successUpdate} = userUpdate
 
     useEffect(() => {
+
+        if(successUpdate){
+            dispatch({type:USER_UPDATE_RESET})
+            navigate('/admin/userlist')
+        }else{
+
         if (!user.name || user._id !== Number(userId.id)){
             dispatch(getUserDetails(userId.id))
         }else{
@@ -33,10 +43,12 @@ function UseEditScreen() {
             setEmail(user.email)
             setIsAdmin(user.isAdmin)
         }
-    }, [user, userId.id])
+    }
+    }, [user, userId.id,successUpdate,navigate])
 
     const submitHandler = (e) => {
     e.preventDefault()
+    dispatch(updateUser({_id:user._id, name,email,isAdmin}))
 
 
     } 
@@ -48,6 +60,9 @@ function UseEditScreen() {
 
         <FormContainer>
             <h1>Edit User</h1>
+            {loadingUpdate && <Loader />}
+            {errorUpdate && <Message variant='danger'>{error}</Message> }
+
             {loading ? <Loader/> :error ? <Message variant='danger'>{error}</Message> :(
                 <Form onSubmit={submitHandler}>
 
