@@ -7,7 +7,7 @@ import FormContainer from '../components/FormContainer'
 import CheckOutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { deliverOrder, getOrderDetails } from '../actions/orderActions'
 
 
 
@@ -19,6 +19,16 @@ function OrderScreen() {
   const orderDetails = useSelector(state => state.orderDetails)
   const { order, error, loading } = orderDetails
   
+
+  const orderDeliver = useSelector(state => state.orderDeliver)
+  const { loading: loadingDeliver, success:successDeliver } = orderDeliver
+
+
+  
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
@@ -30,11 +40,18 @@ function OrderScreen() {
 
 
   useEffect(() => {
-    if(!order || order._id !== Number(orderId)) {
+    if(!order || order._id !== Number(orderId) || successDeliver) {
+
+
         dispatch(getOrderDetails(orderId.id))
     }
 
   }, [dispatch])  
+
+
+const deliverHandler = () => {
+  dispatch(deliverOrder(order))
+}
 
 
   return loading ? (
@@ -138,9 +155,18 @@ function OrderScreen() {
                           <Col>${order.totalPrice}</Col>
                       </Row>
                   </ListGroup.Item>
-
-                     
-                            
+      
+                  {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                  <ListGroup.Item>
+                  <Button
+                      type='button'
+                      className='btn btn-block'
+                      onClick={deliverHandler}
+                  >
+                      Mark As Delivered
+                  </Button>
+                  </ListGroup.Item>   
+                  )}
                   </ListGroup>
                 </Card>
             </Col>
