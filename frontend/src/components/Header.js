@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Navbar, Nav,Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../actions/userActions'
+import SearchBox from './SearchBox'
 
 
 
@@ -26,6 +27,7 @@ function Header() {
         
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+          <SearchBox />
           <Nav className="mr-auto">
 
 

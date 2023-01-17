@@ -36,7 +36,7 @@ function ProductEditScreen() {
 
 
     const productUpdate = useSelector(state => state.productUpdate)
-    const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpdate
+    const { error:errorUpdate, loading:loadingUpdate, success:successUpdate } = productUpdate
 
 
 
@@ -44,20 +44,20 @@ function ProductEditScreen() {
         if (successUpdate) {
             dispatch({ type: PRODUCT_UPDATE_RESET })
             navigate('/admin/productlist')
-        } else 
-        if (!product.name || product._id !== Number(productId.id)){
-            dispatch(listProductDetails(productId.id))
-        }else{
-            setName(product.name)
-            setPrice(product.price)
-            setImage(product.image)
-            setBrand(product.brand)
-            setCategory(product.category)
-            setCountInStock(product.countInStock)
-            setDescription(product.description)
+        } else {
+            if (!product.name || product._id !== Number(productId.id)){
+                dispatch(listProductDetails(productId.id))
+            }else{
+                setName(product.name)
+                setPrice(product.price)
+                setImage(product.image)
+                setBrand(product.brand)
+                setCategory(product.category)
+                setCountInStock(product.countInStock)
+                setDescription(product.description)
+            }
         }
-    
-    }, [dispatch,product, productId.id,navigate])
+    }, [dispatch,product, productId.id,navigate,successUpdate])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -111,7 +111,7 @@ function ProductEditScreen() {
             {loadingUpdate && <Loader />}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
-            {loading ? <Loader/> :error ? <Message variant='danger'>{error}</Message> :(
+            {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :(
                 <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='name'>

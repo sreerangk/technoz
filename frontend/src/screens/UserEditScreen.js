@@ -90,7 +90,7 @@ function UseEditScreen() {
                 </Form.Group>
 
                 <Form.Group controlId='isadmin'>
-                   
+                <Form.Label>Is Admin </Form.Label>
                     <Form.Check
                         type='checkbox'
                         placeholder='Is Admin'
