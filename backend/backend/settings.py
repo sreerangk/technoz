@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     "corsheaders",
-    
+    "djoser",
     'base.apps.BaseConfig',
 ]
 
@@ -181,4 +181,15 @@ MEDIA_ROOT = 'static/images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+
+
+SITE_URL='http://localhost:3000'
+
+BACKEND_SITE_URL='http://localhost:8000/'
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Online Marketplace <helpa077637@gmail.com>'
