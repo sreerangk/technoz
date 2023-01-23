@@ -16,6 +16,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import Chat from './components/Chat';
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
+          
             {" "}
             <Route path="/" element={<HomeScreen />} exact />
             <Route path="/login" element={<LoginScreen />} />
@@ -39,7 +41,7 @@ function App() {
             <Route path="/order/:id" element={<OrderScreen />}/>
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/:id?" element={<CartScreen />} />
-
+        
 
             <Route path="/admin/userList" element={<UserListScreen />} />
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
@@ -53,6 +55,7 @@ function App() {
           </Routes>
         </Container>
       </main>
+      
       <footer />
     </BrowserRouter>
   );

@@ -11,6 +11,7 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
+    ORDER_PAY_RESET,
 
     
     ORDER_LIST_MY_REQUEST,
@@ -123,6 +124,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 
 
 export const payOrder = (id, payementResult) => async (dispatch, getState) => {
+    console.log(id)
     try {
         dispatch({
             type: ORDER_PAY_REQUEST

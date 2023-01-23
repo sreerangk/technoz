@@ -17,7 +17,6 @@ export class Chat extends Component {
   render() {
     return (
       <div>
-        <h1>chat boat</h1>
       </div>
     )
   }

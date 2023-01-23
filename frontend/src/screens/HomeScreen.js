@@ -11,12 +11,13 @@ import { listProducts } from '../actions/productActions'
 
 import {  useNavigate, useLocation, useSearchParams  } from 'react-router-dom'
 import ProductCarousel from '../components/ProductCarousal';
+import Chat from '../components/Chat';
 
 function HomeScreen() {
   
   const dispatch = useDispatch();
 
-
+  const keyword = useLocation();
 
   const productList = useSelector( state => state.productList);
   const {error, loading, products} = productList;
@@ -28,7 +29,7 @@ function HomeScreen() {
 
   return (
     <div className='p-0'>
-
+      <Chat />
         <Container className='p-3'>
         <ProductCarousel />
         <h1>Latest Products</h1>
